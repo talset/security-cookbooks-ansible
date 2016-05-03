@@ -1,0 +1,6 @@
+- lineinfile: dest=/etc/sysctl.conf regexp="{{ item.regex }}" line="{{ item.line }}"
+  with_items:
+    - { regex: "^net.ipv6.conf.all.accept_redirect", line: "net.ipv6.conf.all.accept_redirects = 0" }
+    - { regex: "^net.ipv6.conf.default.accept_redirect", line: "net.ipv6.conf.default.accept_redirects = 0" }
+
+- shell: sysctl -p

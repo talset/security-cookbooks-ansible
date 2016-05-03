@@ -1,0 +1,13 @@
+- name: Set permission of cron files
+  file:
+    path: "{{ item.path }}"
+    mode: "{{ item.mode }}"
+  with_items:
+    - {path: '/etc/anacrontab', mode: 600}
+    - {path: '/etc/crontab', mode: 600}
+    - {path: '/etc/cron.hourly', mode: 700}
+    - {path: '/etc/cron.daily', mode: 700}
+    - {path: '/etc/cron.weekly', mode: 700}
+    - {path: '/etc/cron.monthly', mode: 700}
+    - {path: '/etc/cron.d', mode: 700}
+    - {path: '/var/spool/cron', mode: 700}

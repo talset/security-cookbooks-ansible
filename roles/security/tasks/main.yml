@@ -1,3 +1,11 @@
 ---
 
 - include: grub.yml
+  tags:
+    - grub
+- include: kernel.yml
+  tags:
+    - kernel
+- include: cron.yml
+  tags:
+    - cron
