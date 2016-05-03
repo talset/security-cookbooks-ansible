@@ -1,4 +1,4 @@
 ---
-- hosts: atomic
+- hosts: masters
   roles:
     - security

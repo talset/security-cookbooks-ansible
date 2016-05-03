@@ -1,0 +1,4 @@
+- name: Set boot/loader/grub.cfg to 600
+  file:
+    path: /boot/loader/grub.cfg
+    mode: 0600
