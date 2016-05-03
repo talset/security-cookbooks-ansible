@@ -1,0 +1,4 @@
+---
+- hosts: atomic
+  roles:
+    - security
