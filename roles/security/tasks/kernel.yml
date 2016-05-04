@@ -4,5 +4,7 @@
     - { regex: "^net.ipv6.conf.default.accept_redirect", line: "net.ipv6.conf.default.accept_redirects = 0" }
     - { regex: "^net.ipv6.conf.all.accept_ra", line: "net.ipv6.conf.all.accept_ra = 0" }
     - { regex: "^net.ipv6.conf.default.accept_ra", line: "net.ipv6.conf.default.accept_ra = 0" }
+  register: line
 
 - shell: sysctl -p
+  when: line.changed
