@@ -1,0 +1,22 @@
+---
+
+- copy:
+    content: "###############################################################\n#        Welcome                                              #\n#  All connections are monitored and recorded                 #\n#  Disconnect IMMEDIATELY if you are not an authorized user!  #\n###############################################################\n"
+    dest: /etc/motd
+    owner: root
+    group: root
+    mode: 0644
+
+- copy:
+    content: "Redhat\n"
+    dest: /etc/issue
+    owner: root
+    group: root
+    mode: 0644
+
+- copy:
+    content: "Redhat\n"
+    dest: /etc/issue.net
+    owner: root
+    group: root
+    mode: 0644

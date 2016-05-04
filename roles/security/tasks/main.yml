@@ -1,11 +1,14 @@
 ---
 
 - include: grub.yml
-  tags:
-    - grub
+  tags: grub
 - include: kernel.yml
-  tags:
-    - kernel
+  tags: kernel
 - include: cron.yml
-  tags:
-    - cron
+  tags: cron
+- include: ssh.yml
+  tags: ssh
+- include: issue-motd.yml
+  tags: motd
+- include: pam.yml
+  tags: pam

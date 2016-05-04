@@ -11,3 +11,19 @@
     - {path: '/etc/cron.monthly', mode: 700}
     - {path: '/etc/cron.d', mode: 700}
     - {path: '/var/spool/cron', mode: 700}
+
+- name: Remove cron and at deny file
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - /etc/cron.deny
+    - /etc/at.deny
+
+- name: Allow only root user for cron and at
+  copy:
+    dest: "{{ item }}"
+    content: "root"
+  with_items:
+    - /etc/cron.allow
+    - /etc/at.allow

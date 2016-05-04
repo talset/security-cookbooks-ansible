@@ -1,0 +1,33 @@
+- name: Pam configuration system-auth
+  lineinfile:
+    dest: /etc/pam.d/system-auth
+    line: "{{ item }}"
+  with_items:
+    - "password    required      pam_cracklib.so try_first_pass retry=3 minlen=8 dcredit=-1 ucredit=-1 ocredit=-1 lcredit=-1"
+    - "auth    required      pam_faillock.so preauth audit silent deny=5 unlock_time=900"
+    - "auth    [default=die]      pam_faillock.so authfail audit deny=5 unlock_time=900"
+    - "auth    sufficient      pam_faillock.so authsucc audit deny=5 unlock_time=900"
+    - "auth    [success=1 default=bad]      pam_unix.so"
+
+
+- name: Pam configuration password-auth
+  lineinfile:
+    dest: /etc/pam.d/password-auth
+    line: "{{ item }}"
+  with_items:
+    - "auth    required      pam_faillock.so preauth audit silent deny=5 unlock_time=900"
+    - "auth    [default=die]      pam_faillock.so authfail audit deny=5 unlock_time=900"
+    - "auth    sufficient      pam_faillock.so authsucc audit deny=5 unlock_time=900 "
+    - "auth    [success=1 default=bad]      pam_unix.so"
+
+
+- name: Pam check encryption
+  shell: authconfig --test | grep hashing | grep -q sha512
+  ignore_errors: True
+  always_run: yes
+  changed_when: false
+  register: grep
+
+- name: Pam The SHA-512 encryption must be used
+  command: authconfig --passalgo=sha512 --update
+  when: grep|failed
