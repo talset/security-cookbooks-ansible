@@ -8,7 +8,7 @@
     - "auth    [default=die]      pam_faillock.so authfail audit deny=5 unlock_time=900"
     - "auth    sufficient      pam_faillock.so authsucc audit deny=5 unlock_time=900"
     - "auth    [success=1 default=bad]      pam_unix.so"
-
+    - "password sufficient pam_unix.so remember=5"
 
 - name: Pam configuration password-auth
   lineinfile:
@@ -20,6 +20,12 @@
     - "auth    sufficient      pam_faillock.so authsucc audit deny=5 unlock_time=900 "
     - "auth    [success=1 default=bad]      pam_unix.so"
 
+- name: Pam configuration su
+  lineinfile:
+    dest: /etc/pam.d/su
+    line: "{{ item }}"
+  with_items:
+    - "auth required pam_wheel.so use_uid"
 
 - name: Pam check encryption
   shell: authconfig --test | grep hashing | grep -q sha512

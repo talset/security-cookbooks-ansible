@@ -1,0 +1,10 @@
+- name: The password security policy must be enforced login.defs
+  lineinfile:
+    dest: /etc/login.defs
+    line: "{{ item.line }}"
+    regexp: "{{ item.regex }}"
+  with_items:
+    - { regex: "^PASS_MIN_LEN.*", line: "PASS_MIN_LEN 10" }
+    - { regex: "^PASS_MAX_DAY.*", line: "PASS_MAX_DAYS 90" }
+    - { regex: "^PASS_MIN_DAYS.*", line: "PASS_MIN_DAYS 7" }
+    - { regex: "^PASS_WARN_AGE.*", line: "PASS_WARN_AGE 7" }

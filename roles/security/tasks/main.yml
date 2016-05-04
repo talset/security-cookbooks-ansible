@@ -12,3 +12,5 @@
   tags: motd
 - include: pam.yml
   tags: pam
+- include: user.yml
+  tags: user
