@@ -5,5 +5,5 @@
     path: "{{ item.path }}"
     mode: "{{ item.mode }}"
   with_items:
-    - {path: '/var/log/wtmp', mode: 0644}
+    - {path: '/var/log/wtmp', mode: 644}
 
