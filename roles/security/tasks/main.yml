@@ -14,3 +14,5 @@
   tags: pam
 - include: user.yml
   tags: user
+- include: logs.yml
+  tags: logs

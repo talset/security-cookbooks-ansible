@@ -16,3 +16,7 @@
     - { regex: "^#?PermitUserEnvironment ", line: "PermitUserEnvironment no" }
     - { regex: "^#?Ciphers ", line: "Ciphers aes256-ctr,aes192-ctr,aes128-ctr" }
     - { regex: "^#?Banner ", line: "Banner /etc/issue" }
+  register: line
+
+- service: name=sshd state=reloaded
+  when: line.changed
